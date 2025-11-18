@@ -34,3 +34,10 @@ the following form: YYYY.0M.0D.
 ### Updated
 - Adjusted design to include enhanced methods: shuffle(), sortByArtist(), and size()
 
+## [2025.11.7]
+
+### Added
+- Created `PlaylistManagerSecondary.java` abstract class
+
+### Updated
+- Updated the component abstract class to reflect the changes.
