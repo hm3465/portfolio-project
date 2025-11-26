@@ -119,7 +119,13 @@ Below is further rationale/explanation for the rubric items above:
 > discuss how that representation will be restricted (i.e., by convention)
 > and interpreted (i.e., by correspondence).
 
-<!-- TODO: select a representation and explain why -->
+I am choosing to represent queue<string> on my component. I am using it from the OSU components
+because it is easy to use and I am familiar with it. Also, it makes sense to use queue for my component
+because there are parts such as adding songs to the end which is when I can enqueue(). Also the convention I will
+use is |$this.rep|, which is always even. This restricts what states are valid for representation. The correspondence
+explains how to interpret the representation as a playlist. The queue entries are interpreted as titles and also for the indices
+the title is at $this.rep[i] and artist at $this.rep[i+1].
+
 
 > To start making your kernel implementation, make a branch off of main in your
 > new repo called something like `kernel-implementation`. There are many ways to
@@ -141,7 +147,6 @@ Below is further rationale/explanation for the rubric items above:
 > rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 > and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
 
-<!-- TODO: make a new branch from main then delete this comment -->
 
 ## Assignment Tasks
 
