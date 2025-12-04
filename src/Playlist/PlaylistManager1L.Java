@@ -23,7 +23,10 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
      *Invariant: rep.size() % 2 == 0
      */
     private LinkedList<String> rep;
-    /* Constructor: create empty playlist */
+
+    /**
+     * Constructor: create empty playlist
+     */
     public PlaylistManager1L() {
         this.rep = new LinkedList<>();
         assert this.rep.size() % 2 == 0 : "Representation invariant violated: size must be even";
@@ -32,7 +35,7 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
     public PlaylistManager1L newInstance() {
         return new PlaylistManager1L();
     }
-    /* Standard method: transferFrom -- steal representation from source */
+
     @Override
     public void transferFrom(PlaylistManager source){
         if (source == this) {
@@ -53,13 +56,10 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
         }
 
         PlaylistManager1L src = (PlaylistManager1L) source;
-        // steal internal representation
         this.rep = src.rep;
-        src.rep = new LinkedList<>(); // leave source in empty, valid state
-        assert this.rep.size() % 2 == 0 : "Representation invariant violated after transferFrom";
+        src.rep = new LinkedList<>();
     }
 
-    /* Kernel method: addSong(title, artist) */
     @Override
     public void addSong(String title, String artist) {
         Objects.requireNonNull(title, "title must not be null");
@@ -71,13 +71,11 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
             throw new IllegalArgumentException("artist must not be empty");
         }
 
-        // append title then artist
         this.rep.addLast(title);
         this.rep.addLast(artist);
         assert this.rep.size() % 2 == 0 : "Representation invariant violated after addSong";
     }
 
-    /* Kernel method: removeSong(title) -- remove first song with given title (case-insensitive) */
     @Override
     public void removeSong(String title) {
         Objects.requireNonNull(title, "title must not be null");
@@ -85,27 +83,22 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
             throw new IllegalArgumentException("title must not be empty");
         }
 
-        // iterate over pairs
         for (int i = 0; i < this.rep.size(); i += 2) {
             String t = this.rep.get(i);
             if (t.equalsIgnoreCase(title)) {
-                // remove t and its artist at i+1
-                this.rep.remove(i);   // removes title
-                this.rep.remove(i);   // now the artist shifted to index i, remove it
+                this.rep.remove(i);
+                this.rep.remove(i);
                 assert this.rep.size() % 2 == 0 : "Representation invariant violated after removeSong";
                 return;
             }
         }
-        // if not found: do nothing (ensures: if existed, removed)
     }
 
-    /* Kernel method: isEmpty */
     @Override
     public boolean isEmpty() {
         return this.rep.isEmpty();
     }
 
-    /* Kernel method: playNext -- remove first song and "play" it (print) */
     @Override
     public void playNext() {
         if (this.rep.isEmpty()) {
@@ -113,20 +106,18 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
         }
         String title = this.rep.removeFirst();
         String artist = this.rep.removeFirst();
-        // "playing" effect: print to console (you can change to a real play action)
         System.out.println("Playing: " + title + " by " + artist);
         assert this.rep.size() % 2 == 0 : "Representation invariant violated after playNext";
     }
 
-    /* Optional: toString to help debugging */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[ ");
         for (int i = 0; i < this.rep.size(); i += 2) {
             sb.append("{");
-            sb.append(this.rep.get(i));       // title
+            sb.append(this.rep.get(i));
             sb.append(" - ");
-            sb.append(this.rep.get(i + 1));   // artist
+            sb.append(this.rep.get(i + 1));
             sb.append("}");
             if (i + 2 < this.rep.size()) {
                 sb.append(", ");
