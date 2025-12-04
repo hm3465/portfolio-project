@@ -47,9 +47,6 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
             PlaylistManager temp = this.newInstance();
             // move elements one-by-one from source into temp, then from temp into this
             while (!source.isEmpty()) {
-                // we need a way to inspect title/artist pair from source;
-                // assume playNext() removes the first song (consumes), so we cannot reconstruct easily.
-                // Therefore, prefer that source is same implementation; otherwise throw for clarity.
                 throw new IllegalArgumentException(
                     "transferFrom requires source to be a PlaylistManager1L (same implementation)");
             }
