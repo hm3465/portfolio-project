@@ -1,5 +1,8 @@
 import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Implementation of the PlaylistManager component.
@@ -20,7 +23,7 @@ import java.util.Objects;
 public class PlaylistManager1L extends PlaylistManagerSecondary {
 
     /**
-     *Invariant: rep.size() % 2 == 0
+     * Invariant: rep.size() % 2 == 0
      */
     private LinkedList<String> rep;
 
@@ -31,6 +34,7 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
         this.rep = new LinkedList<>();
         assert this.rep.size() % 2 == 0 : "Representation invariant violated: size must be even";
     }
+
     @Override
     public PlaylistManager1L newInstance() {
         return new PlaylistManager1L();
@@ -41,15 +45,11 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
         if (source == this) {
             return;
         }
-        //Requires that source is a PlaylistManager1L to access its rep
+
+        // Requires that source is a PlaylistManager1L to access its rep
         if (!(source instanceof PlaylistManager1L)) {
-            // Fallback: use the public kernel methods to move elements out of source
-            PlaylistManager temp = this.newInstance();
-            // move elements one-by-one from source into temp, then from temp into this
-            while (!source.isEmpty()) {
-                throw new IllegalArgumentException(
-                    "transferFrom requires source to be a PlaylistManager1L (same implementation)");
-            }
+            throw new IllegalArgumentException(
+                "transferFrom requires source to be a PlaylistManager1L (same implementation)");
         }
 
         PlaylistManager1L src = (PlaylistManager1L) source;
@@ -108,17 +108,98 @@ public class PlaylistManager1L extends PlaylistManagerSecondary {
     }
 
     @Override
+    public void shuffle() {
+        if (this.rep.isEmpty()) {
+            return;
+        }
+
+        // Convert pairs to a temporary list for shuffling
+        ArrayList<String> temp = new ArrayList<>(this.rep);
+
+        int numSongs = temp.size() / 2;
+        for (int i = numSongs - 1; i > 0; i--) {
+            int j = (int) (Math.random() * (i + 1));
+
+            // Swap song i with song j
+            int id1 = i * 2;
+            int id2 = j * 2;
+
+            // Swap title
+            String tempTitle = temp.get(id1);
+            temp.set(id1, temp.get(id2));
+            temp.set(id2, tempTitle);
+
+            // Swap artist
+            String tempArtist = temp.get(id1 + 1);
+            temp.set(id1 + 1, temp.get(id2 + 1));
+            temp.set(id2 + 1, tempArtist);
+        }
+
+        // Replace the rep with shuffled version
+        this.rep = new LinkedList<>(temp);
+
+        System.out.println("Playlist shuffled!");
+        assert this.rep.size() % 2 == 0 : "Representation invariant violated after shuffle";
+    }
+
+    @Override
+    public void sortByArtist() {
+        if (this.rep.isEmpty()) {
+            return;
+        }
+
+        // Extract songs into a sortable structure
+        class SongPair implements Comparable<SongPair> {
+            String title;
+            String artist;
+
+            SongPair(String title, String artist) {
+                this.title = title;
+                this.artist = artist;
+            }
+
+            @Override
+            public int compareTo(SongPair other) {
+                return this.artist.toLowerCase().compareTo(other.artist.toLowerCase());
+            }
+        }
+
+        ArrayList<SongPair> songs = new ArrayList<>();
+        for (int i = 0; i < this.rep.size(); i += 2) {
+            songs.add(new SongPair(this.rep.get(i), this.rep.get(i + 1)));
+        }
+
+        // Sort by artist
+        Collections.sort(songs);
+
+        // Rebuild the rep with sorted songs
+        this.rep.clear();
+        for (SongPair song : songs) {
+            this.rep.addLast(song.title);
+            this.rep.addLast(song.artist);
+        }
+
+        System.out.println("Playlist sorted by artist!");
+        assert this.rep.size() % 2 == 0 : "Representation invariant violated after sort";
+    }
+
+    @Override
+    public int size() {
+        return this.rep.size() / 2;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[ ");
         for (int i = 0; i < this.rep.size(); i += 2) {
+            if (i > 0) {
+                sb.append(", ");
+            }
             sb.append("{");
             sb.append(this.rep.get(i));
             sb.append(" - ");
             sb.append(this.rep.get(i + 1));
             sb.append("}");
-            if (i + 2 < this.rep.size()) {
-                sb.append(", ");
-            }
         }
         sb.append(" ]");
         return sb.toString();

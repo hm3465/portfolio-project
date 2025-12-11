@@ -1,8 +1,8 @@
 # Portfolio Part 6: Finishing Touches
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) and delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) and delete this comment -->
-- **Due Date**: <!-- TODO: fill out with due date and time (e.g., 10/17 @ 3:10 PM EST) and delete this comment -->
+- **Name**: Harshith Middela
+- **Dot Number**: middela.1
+- **Due Date**: 12/10 11:59 pm
 
 ## Assignment Overview
 
@@ -50,7 +50,6 @@ course, but just knowing about them could set you up for long term success.
 
 ## Assignment Checklist
 
-<!-- TODO: browse the checklist then delete this comment -->
 
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
@@ -141,7 +140,6 @@ to see them. If you don't like this workflow, you may try following the
 rebase strategies described [here](https://stackoverflow.com/questions/35790561/working-while-waiting-for-pending-pr)
 and [here](https://stackoverflow.com/questions/18021888/continue-working-on-a-git-branch-after-making-a-pull-request).
 
-<!-- TODO: make a new branch from main then delete this comment -->
 
 ## Assignment Tasks
 
@@ -307,18 +305,28 @@ Take some time to fill them out honestly.
 > complete the portfolio project, how much better (or worse) do you think you
 > understand software development and why?
 
-<!-- TODO: discuss -->
+I have a better understanding of how software structure works in terms of kernels and interfaces.
+An example of this is when I had to implement the shuffle and sort methods and i realized the importance
+of the kernel design.
+
 
 > Also, did the portfolio project surface any gaps in your own knowledge of
 > software development. If so, what are those gaps and how did you address them?
 
-<!-- TODO: discuss -->
+Yes, it did and it is related to understanding methods. My intial design had a playNext method which
+removed the song instead of doing its purpose. Then, I realized that the secondary class couldn't verify
+size or toString without destroying the playlist. This is why I addressed the gap with a 1L implementation because
+they override secondary methods to provide access to the data.
+
 
 > Finally, as a part of completing the portfolio project, to what extent has
 > your perspective of software development changed, if at all? In other words,
 > is software development something you still enjoy? If not, why not?
 
-<!-- TODO: discuss -->
+My perspective has shifted in the way I design contracts because I thought the javadoc
+clauses were usually not helpful, but writing them throughout the project helped me understand
+why they are on every coding problem in software 1 and 2.
+
 
 > One of the challenges of completing the portfolio project is picking up a lot
 > of skills on your own. Some of these skills are, of course, software skills.
@@ -326,29 +334,33 @@ Take some time to fill them out honestly.
 > this process. Therefore, the first question is what skills did you pick up
 > through this process?
 
-<!-- TODO: discuss -->
+I pickued up skills in JUnit testing without any reference. I also learned project management
+by this assignemnt being broken down into smaller parts, and I will definity reference this in my
+future projects.
 
 > The follow-up question is: could you rephrase these skills you picked up
 > as bullet points that you could put on a resume? Try it below.
 
-<!-- TODO: discuss -->
+* Component-Based Software Engineering
+* Unit Testing
 
 > Next, how has working on this project affected your career trajectory?
 > In other words, do you now hate the topic you picked? Or, are you even more
 > interested in it? Both outcomes are valuable to your personal development.
 
-<!-- TODO: discuss -->
+I am more interested in back-end development and I am disappointed in the topic I pick and
+I have other ideas which I look forward to work on.
 
 > Finally, consider the skills you've picked up and your current career
 > trajectory. What are some things you could do to continue on your
 > career trajectory? Also, who are some mentors you could contact to help
 > you stay on your path?
 
-<!-- TODO: discuss -->
+I could practice designing other components to solidify my understanding of Kernel vs. Secondary implementations.
+I could also reach out to my TAs or Jeremy to help me stay on my path.
 
 ### Changelog
 
-<!-- TODO: update CHANGELOG then delete this comment -->
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -367,8 +379,8 @@ the following form: YYYY.0M.0D.
 
 ### Added
 
-- Designed test suite for <!-- insert name of component here --> component
-- Designed two different use cases for <!-- insert name of component here --> component
+- Designed test suite for PlaylistManager component
+- Designed two different use cases for PlaylistManager component
 
 ### Updated
 
@@ -384,7 +396,6 @@ request merge (or at least tag your commits). This is not required.
 
 ### Submission
 
-<!-- TODO: read the submission instructions then delete this comment -->
 
 Assuming that your project is in a GitHub repo somewhere and your changes are on
 a proof-of-concept branch, then what we'll want you to do is create a pull

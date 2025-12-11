@@ -46,3 +46,14 @@ the following form: YYYY.0M.0D.
 
 ### Added
 - Created `PlaylistManager1L.java`
+
+## [2025.12.10]
+
+### Added
+- Created `PlaylistManagerKernelTest.java`
+- Created `PlaylistTest.java`
+- Created `Radio.java`
+- Created `PartyPlaylist.java`
+
+### Updated
+- Updated the PlaylistMangerKernel and PlaylistManagerSecondary to fix errors.
